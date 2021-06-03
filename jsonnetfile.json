@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "dependencies": [
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/anguslees/kustomize-libsonnet.git",
+          "subdir": ""
+        }
+      },
+      "version": "master"
+    },
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/bitnami-labs/kube-libsonnet.git",
+          "subdir": ""
+        }
+      },
+      "version": "master",
+      "name": "bitnami-labs"
+    },
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/grafana/jsonnet-libs.git",
+          "subdir": "tanka-util"
+        }
+      },
+      "version": "master",
+      "name": "jsonnet-libs"
+    }
+  ],
+  "legacyImports": true
+}
