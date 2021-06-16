@@ -16,5 +16,8 @@ function(params) {
   ]),
   argocdRedis: holder {
     deployment_argocd_redis: std.map(kustomization, [holder.deployment_argocd_redis])[0],
+    role_argocd_redis: {},
+    role_binding_argocd_redis: {},
+    service_account_argocd_redis: {},
   },
 }
