@@ -8,6 +8,6 @@ function(params) {
   _config:: params,
   argocdConfig: holder {
     config_map_argocd_cm: if $._config.argocd_cm != null then $._config.argocd_cm else holder.config_map_argocd_cm,
-    config_map_argocd_ssh_known_hosts_cm: if $._config.argocd_ssh_known_hosts_cm != null then $._config.argocd_ssh_known_hosts_cm else holder.config_map_argocd_ssh_known_hosts_cm
+    config_map_argocd_ssh_known_hosts_cm: if $._config.argocd_ssh_known_hosts_cm != null then $._config.argocd_ssh_known_hosts_cm else holder.config_map_argocd_ssh_known_hosts_cm,
   },
 }

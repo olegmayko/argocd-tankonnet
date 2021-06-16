@@ -13,14 +13,16 @@ local server = (import 'components/server/argocd-server.jsonnet');
         argocd: 'v2.0.2',
       },
       namespace: 'argocd',
-      namespaceLabels: { 'app.kubernetes.io/part-of': 'argocd'},
+      namespaceLabels: { 'app.kubernetes.io/part-of': 'argocd' },
     },
 
     appController: {
       argocdImage: if std.objectHas($.values.common.images, 'argocd') then $.values.common.images.argocd else null,
       version: $.values.common.versions.argocd,
     },
-    clusterRBAC: {},
+    clusterRBAC: {
+      namespace: $.values.common.namespace,
+    },
     config: {
       argocd_cm: if std.objectHas($.values.common.configmaps, 'argocd_cm') then $.values.common.configmaps.argocd_cm else null,
       argocd_ssh_known_hosts_cm: if std.objectHas($.values.common.configmaps, 'argocd_ssh_known_hosts_cm') then $.values.common.configmaps.argocd_ssh_known_hosts_cm else null,
@@ -58,7 +60,7 @@ local server = (import 'components/server/argocd-server.jsonnet');
       kind: 'Namespace',
       metadata: {
         name: $.values.common.namespace,
-        labels: $.values.common.namespaceLabels
+        labels: $.values.common.namespaceLabels,
       },
     },
   },

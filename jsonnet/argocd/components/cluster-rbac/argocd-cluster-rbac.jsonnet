@@ -6,5 +6,20 @@ local holder = kustomize.build(path='./');
 // use same approach as in kube-prometheus project
 function(params) {
   _config:: params,
-  argocdClusterRBAC: holder,
+  argocdClusterRBAC: holder {
+    cluster_role_binding_argocd_server+: {
+      subjects: [{
+        kind: 'ServiceAccount',
+        name: 'argocd-server',
+        namespace: $._config.namespace,
+      }],
+    },
+    cluster_role_binding_argocd_application_controller+: {
+      subjects: [{
+        kind: 'ServiceAccount',
+        name: 'argocd-application-controller',
+        namespace: $._config.namespace,
+      }],
+    },
+  },
 }
