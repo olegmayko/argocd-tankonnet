@@ -1,6 +1,6 @@
 //local argocdCm = (import 'argocd-cm.jsonnet');
 //local argocdSSHKnownHostCm = (import 'argocd-ssh-known-hosts-cm.jsonnet');
-local argo = (import 'jsonnet/argocd/main.libsonnet') +
+local argo = (import 'jsonnet/main.libsonnet') +
 
              {
                values+:: {
@@ -31,3 +31,5 @@ local argo = (import 'jsonnet/argocd/main.libsonnet') +
 { [name]: argo.argocdRepoServer[name] for name in std.objectFields(argo.argocdRepoServer) }
 { [name]: argo.argocdServer[name] for name in std.objectFields(argo.argocdServer) }
 { 'argocdNamespace': argo.argocdNamespace.namespace }
+{ [name]: argo.appsetController[name] for name in std.objectFields(argo.appsetController)}
+{ [name]: argo.appsetCrds[name] for name in std.objectFields(argo.appsetCrds)}
