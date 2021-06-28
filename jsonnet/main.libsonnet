@@ -14,10 +14,10 @@ local appsetCrds = (import 'applicationset/components/crds/appset-crds.jsonnet')
     common: {
       versions: {
         argocd: 'v2.0.2',
-        appsetController: 'v0.1.0'
+        appsetController: 'v0.1.0',
       },
       images: {
-        appsetController: 'quay.io/argocdapplicationset/argocd-applicationset'
+        appsetController: 'quay.io/argocdapplicationset/argocd-applicationset',
       },
       namespace: 'argocd',
       namespaceLabels: { 'app.kubernetes.io/part-of': 'argocd' },
@@ -26,6 +26,7 @@ local appsetCrds = (import 'applicationset/components/crds/appset-crds.jsonnet')
     appController: {
       argocdImage: if std.objectHas($.values.common.images, 'argocd') then $.values.common.images.argocd else null,
       version: $.values.common.versions.argocd,
+      namespace: $.values.common.namespace,
     },
     clusterRBAC: {
       namespace: $.values.common.namespace,
@@ -33,28 +34,34 @@ local appsetCrds = (import 'applicationset/components/crds/appset-crds.jsonnet')
     config: {
       argocd_cm: if std.objectHas($.values.common.configmaps, 'argocd_cm') then $.values.common.configmaps.argocd_cm else null,
       argocd_ssh_known_hosts_cm: if std.objectHas($.values.common.configmaps, 'argocd_ssh_known_hosts_cm') then $.values.common.configmaps.argocd_ssh_known_hosts_cm else null,
+      namespace: $.values.common.namespace,
     },
     argocdCrds: {},
     dex: {
       argocdImage: if std.objectHas($.values.common.images, 'argocd') then $.values.common.images.argocd else null,
       image: if std.objectHas($.values.common.images, 'dex') then $.values.common.images.dex else null,
       version: $.values.common.versions.argocd,
+      namespace: $.values.common.namespace,
     },
     redis: {
       image: if std.objectHas($.values.common.images, 'redis') then $.values.common.images.redis else null,
+      namespace: $.values.common.namespace,
     },
     repoServer: {
       argocdImage: if std.objectHas($.values.common.images, 'argocd') then $.values.common.images.argocd else null,
       version: $.values.common.versions.argocd,
+      namespace: $.values.common.namespace,
     },
     server: {
       argocdImage: if std.objectHas($.values.common.images, 'argocd') then $.values.common.images.argocd else null,
       version: $.values.common.versions.argocd,
+      namespace: $.values.common.namespace,
     },
     appsetCrds: {},
     appsetController: {
       image: if std.objectHas($.values.common.images, 'appsetController') then $.values.common.images.appsetController else null,
       version: $.values.common.versions.appsetController,
+      namespace: $.values.common.namespace,
     },
   },
 
@@ -77,5 +84,5 @@ local appsetCrds = (import 'applicationset/components/crds/appset-crds.jsonnet')
     },
   },
   appsetController: appsetController($.values.appsetController),
-  appsetCrds: appsetCrds($.values.appsetCrds)
+  appsetCrds: appsetCrds($.values.appsetCrds),
 }

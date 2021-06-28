@@ -13,9 +13,12 @@ function(params) {
     helper.images([
       { name: '', newName: if $._config.argocdImage != null then $._config.argocdImage else self.name, newTag: $._config.version },
     ]),
+    helper.namespace($._config.namespace),
   ]),
-  applicationsetController: holder 
-  {
-   deployment_argocd_applicationset_controller: std.map(kustomization, [holder.deployment_argocd_applicationset_controller])[0],
+  applicationsetController: holder {
+    deployment_argocd_applicationset_controller: std.map(kustomization, [holder.deployment_argocd_applicationset_controller])[0],
+    role_argocd_applicationset_controller: std.map(kustomization, [holder.role_argocd_applicationset_controller])[0],
+    role_binding_argocd_applicationset_controller: std.map(kustomization, [holder.role_binding_argocd_applicationset_controller])[0],
+    service_account_argocd_applicationset_controller: std.map(kustomization, [holder.service_account_argocd_applicationset_controller])[0],
   },
 }

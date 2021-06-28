@@ -6,18 +6,19 @@ local argo = (import 'jsonnet/main.libsonnet') +
                values+:: {
                  // overwrite below if you'd like to use custom images and/or different image of argoCD or overwrite default configmaps.
                  common+: {
-                      images+: {
-                      #  argocd: customArgocdImage,
-                      #  dex: customDexImage,
-                      #  redis: customRedisImage
-                      },
-                      versions+: {
-                       # argocd: 'v2.0.3',
-                      },
-                      configmaps+: {
-                       # argocd_cm: argocdCm,
-                       # argocd_ssh_known_hosts_cm: argocdSSHKnownHostCm,
-                      },
+                   images+: {
+                     //  argocd: customArgocdImage,
+                     //  dex: customDexImage,
+                     //  redis: customRedisImage
+                   },
+                   versions+: {
+                     // argocd: 'v2.0.3',
+                   },
+                   configmaps+: {
+                     // argocd_cm: argocdCm,
+                     // argocd_ssh_known_hosts_cm: argocdSSHKnownHostCm,
+                   },
+                   // namespace: 'argocd-kustomize' // default namespace change here to overwrite
                  },
                },
              };
@@ -30,6 +31,6 @@ local argo = (import 'jsonnet/main.libsonnet') +
 { [name]: argo.argocdRedis[name] for name in std.objectFields(argo.argocdRedis) }
 { [name]: argo.argocdRepoServer[name] for name in std.objectFields(argo.argocdRepoServer) }
 { [name]: argo.argocdServer[name] for name in std.objectFields(argo.argocdServer) }
-{ 'argocdNamespace': argo.argocdNamespace.namespace }
-{ [name]: argo.appsetController[name] for name in std.objectFields(argo.appsetController)}
-{ [name]: argo.appsetCrds[name] for name in std.objectFields(argo.appsetCrds)}
+{ argocdNamespace: argo.argocdNamespace.namespace }
+{ [name]: argo.appsetController[name] for name in std.objectFields(argo.appsetController) }
+{ [name]: argo.appsetCrds[name] for name in std.objectFields(argo.appsetCrds) }
