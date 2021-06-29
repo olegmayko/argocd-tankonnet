@@ -11,7 +11,7 @@ function(params) {
   _config:: params,
   local kustomization = helper.applyList([
     helper.images([
-      { name: '', newName: if $._config.argocdImage != null then $._config.argocdImage else self.name, newTag: $._config.version },
+      { name: 'quay.io/argocdapplicationset/argocd-applicationset', newName: if $._config.image != null then $._config.image else self.name, newTag: $._config.version },
     ]),
     helper.namespace($._config.namespace),
   ]),
