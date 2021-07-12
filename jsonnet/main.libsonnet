@@ -34,6 +34,10 @@ local appsetCrds = (import 'applicationset/components/crds/appset-crds.jsonnet')
     config: {
       argocd_cm: if std.objectHas($.values.common.configmaps, 'argocd_cm') then $.values.common.configmaps.argocd_cm else null,
       argocd_ssh_known_hosts_cm: if std.objectHas($.values.common.configmaps, 'argocd_ssh_known_hosts_cm') then $.values.common.configmaps.argocd_ssh_known_hosts_cm else null,
+      config_map_argocd_gpg_keys_cm: if std.objectHas($.values.common.configmaps, 'config_map_argocd_gpg_keys_cm') then $.values.common.configmaps.config_map_argocd_gpg_keys_cm else null,
+      config_map_argocd_rbac_cm: if std.objectHas($.values.common.configmaps, 'config_map_argocd_rbac_cm') then $.values.common.configmaps.config_map_argocd_rbac_cm else null,
+      config_map_argocd_tls_certs_cm: if std.objectHas($.values.common.configmaps, 'config_map_argocd_tls_certs_cm') then $.values.common.configmaps.config_map_argocd_tls_certs_cm else null,
+      secret_argocd_secret: if std.objectHas($.values.common.configmaps, 'secret_argocd_secret') then $.values.common.configmaps.secret_argocd_secret else null,
       namespace: $.values.common.namespace,
     },
     argocdCrds: {},
